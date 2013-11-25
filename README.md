@@ -15,7 +15,7 @@ whose distance to `Pk` is not greater than their distance to the other sites
 `Rk = {x in X | d(x,Pk) <= d(x,Pj) for all j != k}` 
 
 TODO
-====
-[] resize to window
-[] fix point globbing
-[] react to user
+----
+[ ] resize to window
+[ ] fix point globbing
+[ ] react to user
