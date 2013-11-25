@@ -14,6 +14,14 @@ whose distance to `Pk` is not greater than their distance to the other sites
 `Pj` for all `j`:
 `Rk = {x in X | d(x,Pk) <= d(x,Pj) for all j != k}` 
 
+
+Setup
+-----
+Follow the [guide here](https://github.com/evancz/Elm/blob/master/README.md#install) to install elm.
+
+Then feed the elm server the `.elm` file
+
+
 TODO
 ----
 [ ] resize to window
