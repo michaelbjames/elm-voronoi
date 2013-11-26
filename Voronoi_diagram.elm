@@ -14,7 +14,7 @@ region xdim ydim sites current =
              
 drawCircles color (x,y) =
   circle 4.0 |> filled color
-             |> move (2*x,2*y)
+             |> move (x - 200,y - 200)
 
 colorpick x = rgb x x x
 
@@ -27,9 +27,7 @@ scene (w',h') =
   let xdim = 200
       ydim = 200
       pset = [(90,100),(100,90),(0,0),(0,30),(100,60)]
-      positioning x = absolute (div (-1 * x) 2)
-  in container w' h' (bottomLeftAt (positioning w') (positioning h'))
-      <| collage w' h'
+  in collage w' h'
       <| map (\(x,c) -> mkcircles x c (region xdim ydim pset x))
       <| (zip pset [1..20])
 
