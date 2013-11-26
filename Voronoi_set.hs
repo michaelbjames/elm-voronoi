@@ -9,10 +9,10 @@ set dimensions sites curr =
 region dimensions sites current =
   let compsites = filter (\r -> r /= current) sites
       space = foldr (\x base -> (map (\y -> (x,y)) [0..dimensions]) ++ base) [] [0..dimensions]
-  in filter (\point -> foldl (||) False 
+  in filter (\point -> foldl (&&) True 
              $ map (\s -> dist point current <= dist point s) compsites) space
 
 main =
-  let pset = [(3,3),(5,5),(2,5)]
-      maxdim = 600
+  let pset = [(9,1),(1,9), (9,9)]
+      maxdim = 10
   in do print $ map (region maxdim pset) pset
