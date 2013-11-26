@@ -24,8 +24,8 @@ mkcircles (x,y) cindex origins =
   in group <| map (drawCircles color) origins
  
 scene (w,h) = 
-  let xdim = w/4
-      ydim = h/4
+  let xdim = 150
+      ydim = 200
       pset = [(90,100),(100,90),(0,0),(0,30),(100,60)]
   in container w h middle
       <| collage w h
