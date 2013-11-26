@@ -19,17 +19,18 @@ drawCircles color (x,y) =
 colorpick x = rgb x x x
 
 mkcircles (x,y) cindex origins =
-  let angle = degrees (20 * toFloat cindex)
+  let angle = degrees (150 * toFloat cindex)
       color = (hsv angle 0.7 1)
   in group <| map (drawCircles color) origins
  
-scene (w,h) = 
-  let xdim = 150
+scene (w',h') = 
+  let xdim = 200
       ydim = 200
       pset = [(90,100),(100,90),(0,0),(0,30),(100,60)]
-  in container w h middle
-      <| collage w h
-      (map (\(x,c) -> mkcircles x c (region xdim ydim pset x))
-        <| (zip pset [1..20]))
+      positioning x = absolute (div (-1 * x) 2)
+  in container w' h' (bottomLeftAt (positioning w') (positioning h'))
+      <| collage w' h'
+      <| map (\(x,c) -> mkcircles x c (region xdim ydim pset x))
+      <| (zip pset [1..20])
 
 main = lift scene Window.dimensions
