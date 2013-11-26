@@ -14,14 +14,17 @@ drawCircles color (x,y) =
   ngon 6 4.0 |> filled color
              |> move (2*x,2*y)
 
-mkcircles (x,y) origins =
-  let color = rgb (round (x + y * 7) `mod` 256) (round (x * 13 + y) `mod` 256) (round (x * y) `mod` 256)
+colorpick x = rgb x x x
+
+mkcircles (x,y) cindex origins =
+  let angle = degrees (60 * toFloat cindex)
+      color = (hsv angle 0.7 1)
   in group <| map (drawCircles color) origins
  
 scene (w,h) = 
   let maxdim = 150
       pset = [(130,50),(100,100),(45,135),(20,20)]
   in container w h midRight
-      <| collage 900 900 (map (\x -> mkcircles x (region maxdim pset x)) pset)
+      <| collage 900 900 (map (\(x,c) -> mkcircles x c (region maxdim pset x)) <| (zip pset [1..5]))
 
 main = lift scene Window.dimensions
