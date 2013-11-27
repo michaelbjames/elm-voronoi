@@ -24,7 +24,7 @@ Then feed the elm server the `.elm` file
 
 TODO
 ----
-[x] resize to window
-[x] fix point globbing
-[x] react to user
-[ ] Faster algorithm
+- [x] resize to window
+- [x] fix point globbing
+- [x] react to user
+- [ ] Faster algorithm
