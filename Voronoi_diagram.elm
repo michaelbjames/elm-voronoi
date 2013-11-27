@@ -16,18 +16,26 @@ region (xdim,ydim) sites current =
 drawCircles color (x,y) =
   circle 0.4 |> filled color
              |> move (x,y)
-             
-mkcircles (x,y) cindex origins =
+
+mkcircles (x,y) cindex space =
   let angle = degrees (50 * toFloat cindex)
       color = (hsv angle 1 1)
-  in group <| map (drawCircles color) origins
+  in group <| map (drawCircles color) space
  
 scene (w',h') position = 
-  let dimensions = (50,50)
+  let xdim = 50
+      ydim = xdim
       pset = position :: [(40,10),(10,40),(0,0),(0,30),(10,10),(20,30),(10,20),(30,50)]
-  in collage w' h'
-      <| map (\(x,c) -> move (1*toFloat w' /3.0,1*toFloat h'/3.0)
-              <| mkcircles x c (region dimensions pset x))
-      <| (zip pset [1..20])
+      scaleFactor w resolution = w / resolution
+      regen (epicenter,number) = scale (scaleFactor (toFloat w') (toFloat xdim))
+                              <| move (-1 * toFloat w' /2,-1 * toFloat h'/2)
+                              <| mkcircles epicenter number (region (xdim,ydim) pset epicenter)
+  in collage w' h' <| ((zip pset [1..20]) |> map regen)
+                      ++
+                      [rect (toFloat w'/2) (toFloat h'/2)
+                      |> filled (rgba 0 0 255 0.3)
+                      |> move(0,0)]
+                    
+
 
 main = lift2 scene Window.dimensions Mouse.position
