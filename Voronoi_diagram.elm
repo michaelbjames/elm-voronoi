@@ -19,16 +19,16 @@ drawCircles color (x,y) =
              |> move (x,y)
 
 mkcircles (x,y) cindex space =
-  let angle = degrees (50 * toFloat cindex)
+  let angle = degrees (163 * toFloat cindex)
       color = (hsv angle 1 1)
   in group <| map (drawCircles color) space
  
-scene (w',h') position = 
-  let xdim = 100
+scene (w',h') (mx,my) = 
+  let xdim = 50
       ydim = xdim
-      pset = position :: [(40,10),(10,40),(0,0),(0,30),(10,10),(20,30),(10,20),(30,50)]
-      scaleFactor w resolution = w / resolution
-      regen (epicenter,number) = scale (scaleFactor (toFloat w') (toFloat xdim))
+      scaleFactor = (toFloat w') / (toFloat xdim)
+      pset = ((toFloat mx) / scaleFactor,((toFloat (h' - my)) / scaleFactor)) :: [(40,10),(10,40),(0,0),(0,30),(10,10),(20,30),(10,20),(30,50)]
+      regen (epicenter,number) = scale scaleFactor
                               <| move (-1 * toFloat w' /2,-1 * toFloat h'/2)
                               <| mkcircles epicenter number (region (xdim,ydim) pset epicenter)
   in collage w' h' <| ((zip pset [1..20]) |> map regen)
