@@ -14,7 +14,8 @@ region (xdim,ydim) sites current =
              <| map (\s -> dist point current <= dist point s) compsites) space
              
 drawCircles color (x,y) =
-  circle 0.4 |> filled color
+  ngon 8 2   |> filled color
+             |> rotate (degrees 22.5)
              |> move (x,y)
 
 mkcircles (x,y) cindex space =
@@ -23,7 +24,7 @@ mkcircles (x,y) cindex space =
   in group <| map (drawCircles color) space
  
 scene (w',h') position = 
-  let xdim = 50
+  let xdim = 100
       ydim = xdim
       pset = position :: [(40,10),(10,40),(0,0),(0,30),(10,10),(20,30),(10,20),(30,50)]
       scaleFactor w resolution = w / resolution
@@ -31,10 +32,6 @@ scene (w',h') position =
                               <| move (-1 * toFloat w' /2,-1 * toFloat h'/2)
                               <| mkcircles epicenter number (region (xdim,ydim) pset epicenter)
   in collage w' h' <| ((zip pset [1..20]) |> map regen)
-                      ++
-                      [rect (toFloat w'/2) (toFloat h'/2)
-                      |> filled (rgba 0 0 255 0.3)
-                      |> move(0,0)]
                     
 
 
