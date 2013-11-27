@@ -12,7 +12,9 @@ Let `X` be a space with distance function `d`. Let `K` be a set of indices and l
 The Voronoi region `Rk` associated with site `Pk` is the set of all points in `X`
 whose distance to `Pk` is not greater than their distance to the other sites 
 `Pj` for all `j`:
-`Rk = {x in X | d(x,Pk) <= d(x,Pj) for all j != k}` 
+`Rk = {x in X | d(x,Pk) <= d(x,Pj) for all j != k}`
+
+See a [demo](http://michaelbjames.com/sandbox/Voronoi_diagram.html) at my personal website
 
 
 Setup
