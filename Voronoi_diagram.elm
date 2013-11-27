@@ -25,9 +25,10 @@ mkcircles (x,y) cindex space =
  
 scene (w',h') (mx,my) = 
   let xdim = 50
-      ydim = xdim
       scaleFactor = (toFloat w') / (toFloat xdim)
-      pset = ((toFloat mx) / scaleFactor,((toFloat (h' - my)) / scaleFactor)) :: [(40,10),(10,40),(0,0),(0,30),(10,10),(20,30),(10,20),(30,50)]
+      ydim = (toFloat xdim) * (toFloat h') / (toFloat w')
+      mousePosition = ((toFloat mx) / scaleFactor,((toFloat (h' - my)) / scaleFactor))
+      pset = mousePosition :: [(40,10),(10,40),(0,30),(10,10),(20,30)]
       regen (epicenter,number) = scale scaleFactor
                               <| move (-1 * toFloat w' /2,-1 * toFloat h'/2)
                               <| mkcircles epicenter number (region (xdim,ydim) pset epicenter)
