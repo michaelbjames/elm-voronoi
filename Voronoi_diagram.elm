@@ -33,6 +33,7 @@ scene (w',h') (mx,my) =
                               |> move (-1*toFloat w' /2, -1*toFloat h'/2)
       regen (epicenter,color) = mkShapes color <| region (xdim,ydim) pset epicenter
   in collage w' h' <| map fitToScreen <|((zip pset colors) |> map regen)
+                                      --The following two lines will show the epicenters
                                        --++
                                        --(group <| map (drawShape black) pset) :: []
                     
