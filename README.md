@@ -30,3 +30,4 @@ TODO
 - [x] fix point globbing
 - [x] react to user
 - [ ] Faster algorithm
+- [ ] Randomize seed points on each run

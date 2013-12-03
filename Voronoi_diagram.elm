@@ -1,4 +1,3 @@
-import Random
 import Signal
 import Window
 import Mouse
@@ -23,20 +22,19 @@ drawShape color (x,y) =
 mkShapes color space = group <| map (drawShape color) space
  
 scene (w',h') (mx,my) = 
-  let xdim = 70
+  --xdim is directly proportional to the overall speed. It determines the resolution.
+  let xdim = 70 
       scaleFactor = (toFloat w') / (toFloat xdim)
       ydim = (toFloat xdim) * (toFloat h') / (toFloat w')
       mousePosition = ((toFloat mx) / scaleFactor,((toFloat (h' - my)) / scaleFactor))
       pset = mousePosition :: [(40,10),(0,30),(10,10),(20,30),(50,5),(60,30)]
       colors = [yellow,blue,green,grey,red,white,grey,lightBrown]
-      fitToScreen form = form |> scale scaleFactor
-                              |> move (-1*toFloat w' /2, -1*toFloat h'/2)
+      --Thanks evancz for the idea to simplify this line
+      fitToScreen = scale scaleFactor . move (toFloat -w' /2, toFloat -h' /2)
       regen (epicenter,color) = mkShapes color <| region (xdim,ydim) pset epicenter
   in collage w' h' <| map fitToScreen <|((zip pset colors) |> map regen)
-                                      --The following two lines will show the epicenters
+                                       --The following two lines will show the epicenters
                                        --++
                                        --(group <| map (drawShape black) pset) :: []
                     
-
-
 main = lift2 scene Window.dimensions Mouse.position
