@@ -1,4 +1,4 @@
-elm-voronoi --- [Check it out!](http://michaelbjames.com/sandbox/Voronoi_diagram.html)
+elm-voronoi --- [Check it out!](http://michaelbjames.com/sandbox/voronoi.html)
 ==========
 
 Pretty Voronoi Manhattan-distance Diagram
